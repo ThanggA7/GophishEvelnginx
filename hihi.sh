@@ -8,7 +8,17 @@ EXTRACT_DIR="$HOME/gologin_extracted"
 
 echo "[1/4] Cài thư viện phụ thuộc..."
 sudo apt update
-sudo apt install -y wget tar libfuse2 libasound2 libsecret-1-0 libsecret-1-dev
+
+# Detect Ubuntu version 2
+UBUNTU_VERSION=$(lsb_release -rs | cut -d'.' -f1)
+
+if [ "$UBUNTU_VERSION" -ge 24 ]; then
+    echo "→ Ubuntu $UBUNTU_VERSION.x phát hiện: dùng libasound2t64"
+    sudo apt install -y wget tar libfuse2t64 libasound2t64 libasound2-data libasound2-plugins libsecret-1-0 libsecret-1-dev
+else
+    echo "→ Ubuntu $UBUNTU_VERSION.x phát hiện: dùng libasound2"
+    sudo apt install -y wget tar libfuse2 libasound2 libasound2-data libasound2-plugins libsecret-1-0 libsecret-1-dev
+fi
 
 echo "[2/4] Tải GoLogin từ $URL..."
 wget -O "$FILENAME" "$URL"
