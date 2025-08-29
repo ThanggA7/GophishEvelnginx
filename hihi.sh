@@ -5,7 +5,8 @@ echo "==== [1/5] Cập nhật hệ thống & cài thư viện cần thiết ====
 sudo apt update
 sudo apt install -y \
     libfuse2 \
-    libasound2 \
+    libasound2t64 \
+    libasound2-data \
     libsecret-1-0 \
     gnome-keyring \
     seahorse \
